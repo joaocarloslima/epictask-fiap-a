@@ -2,20 +2,22 @@ let titulo = document.querySelector('#titulo')
 let descricao = document.querySelector('#descricao')
 let categoria = document.querySelector('#categoria')
 
+let tarefas = []
 
 document.querySelector('#salvar').addEventListener("click", () => {
+    const modal = bootstrap.Modal.getInstance(document.querySelector('#exampleModal'));    
+    
     let tarefa = {
+        id: Date.now(),
         titulo: titulo.value,
         descricao: descricao.value,
-        categoria: categoria.value
+        categoria: categoria.value,
+        concluido: false
     }
-
-    console.log(validar(tarefa))
-
+    
     if (!validar(tarefa)) return
-
-    document.querySelector("#tarefas").innerHTML += cadastrar(tarefa)
-    const modal = bootstrap.Modal.getInstance(document.querySelector('#exampleModal'));    
+    tarefas.push(tarefa)
+    atualizar()
     modal.hide();
 
 })
@@ -39,14 +41,37 @@ function validarCampo (valor, campo){
     }
 }
 
-function apagar(botao){
-    botao.parentElement.parentElement.parentElement.remove()
+function apagar(id){
+    tarefas = tarefas.filter(tarefa => tarefa.id != id)
+    atualizar()
 }
 
+function atualizar(){
+    document.querySelector("#tarefas").innerHTML = ""
+    tarefas.forEach(tarefa => {
+        document.querySelector("#tarefas").innerHTML += cadastrar(tarefa)
+    })
+}
+
+function concluir(id){
+    // tarefas.forEach(tarefa => {
+    //     if (tarefa.id == id) {
+    //         tarefa.concluido = true
+    //     }
+    // })
+
+    const tarefaEncontrada = tarefas.find(tarefa => tarefa.id === id);
+
+    if (tarefaEncontrada) tarefaEncontrada.concluido = true;
+
+    atualizar()
+    
+}
 
 function cadastrar(tarefa) {
+    const disabled = tarefa.concluido ? "disabled" : ""
     return `
-            <div class="col-lg-3 col-md-6 col-12">
+            <div class="col-lg-3 col-md-6 col-12 mt-3">
                 <div class="card">
                     <div class="card-header">
                         ${tarefa.titulo}
@@ -56,10 +81,10 @@ function cadastrar(tarefa) {
                         <p>
                             <span class="badge text-bg-warning">${tarefa.categoria}</span>
                         </p>
-                        <a href="#" class="btn btn-success">
+                        <a href="#" onClick="concluir(${tarefa.id})" class="btn btn-success ${disabled}" disabled> 
                             <i class="bi bi-check-lg"></i>
                         </a>
-                        <a href="#" onClick="apagar(this)" class="btn btn-danger">
+                        <a href="#" onClick="apagar(${tarefa.id})" class="btn btn-danger">
                             <i class="bi bi-trash"></i>
                         </a>
                     </div>
