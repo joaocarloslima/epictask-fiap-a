@@ -4,6 +4,11 @@ let categoria = document.querySelector('#categoria')
 
 let tarefas = []
 
+window.addEventListener("load", () => {
+    tarefas = JSON.parse(localStorage.getItem("tarefas")) || []
+    atualizar()
+})
+
 document.querySelector('#salvar').addEventListener("click", () => {
     const modal = bootstrap.Modal.getInstance(document.querySelector('#exampleModal'));    
     
@@ -47,6 +52,8 @@ function apagar(id){
 }
 
 function atualizar(){
+    localStorage.setItem("tarefas", JSON.stringify(tarefas))
+
     document.querySelector("#tarefas").innerHTML = ""
     tarefas.forEach(tarefa => {
         document.querySelector("#tarefas").innerHTML += cadastrar(tarefa)
