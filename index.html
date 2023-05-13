@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epic Task</title>
+    <title>Epic Task - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -40,12 +40,13 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Cadastrar</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">Cadastrar</a></li>
                         </ul>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="buscar" aria-label="buscar">
+                    <input id="busca" class="form-control me-2" type="search" placeholder="buscar" aria-label="buscar">
                     <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
             </div>
@@ -59,11 +60,10 @@
         </button>
 
         <div id="tarefas" class="row mt-3">
-            
-        </div> <!-- row -->
+
+        </div> <!-- row SPA -->
 
     </div> <!-- container -->
-    
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,19 +77,19 @@
                     <form>
                         <div class="mb-3">
                             <label for="titulo" class="form-label">Título</label>
-                            <input id="titulo" type="text" class="form-control" id="titulo" aria-describedby="titulo">
+                            <input type="text" class="form-control" id="titulo" aria-describedby="titulo">
                         </div>
                         <div class="mb-3">
                             <label for="descricao" class="form-label">Descrição</label>
-                            <input id="descricao" type="text" class="form-control" id="descricao">
+                            <input type="text" class="form-control" id="descricao">
                         </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoria</label>
-                            <select id="categoria" class="form-select" aria-label="categoria" id="categoria">
+                            <select class="form-select" aria-label="categoria" id="categoria">
                                 <option selected>selecione a categoria</option>
-                                <option value="Estudos">Estudos</option>
-                                <option value="Trabalho">Trabalho</option>
-                                <option value="Pessoal">Pessoal</option>
+                                <option>Estudos</option>
+                                <option>Trabalho</option>
+                                <option>Pessoal</option>
                             </select>
                         </div>
                     </form>
@@ -102,10 +102,12 @@
         </div>
     </div>
 
-    <script src="./crud.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
+
+    <script src="./crud.js"></script>
 
 </body>
 
